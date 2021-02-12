@@ -21,6 +21,7 @@ import { NavbarItemComponent } from './navbar/navbar-item/navbar-item.component'
 import { WdiComponentModule } from './wdi-component/wdi-component.module';
 import { WdiExempleModule } from './wdi-component/exemple/exemple.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ import { HttpClientModule } from '@angular/common/http';
     ,WdiComponentModule
     ,WdiExempleModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
