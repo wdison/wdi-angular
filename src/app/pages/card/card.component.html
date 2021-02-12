@@ -1,0 +1,29 @@
+<div class="form-group">
+  <h3>Card</h3>
+
+  <div class="btn-group-toggle">
+    <label class="btn btn-light" [ngClass]="{'active': efeito }" ngbTooltip="Efeito wdison:ctrl-c">
+      <input type="checkbox" [(ngModel)]="efeito" > Efeito
+    </label>
+  </div>
+
+  <hr>
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div class="card" >
+        <div class="card-header">
+          <h5 class="card-title">{{card.title}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{card.subtitle}}</h6>
+        </div>
+        <div class="card-footer">
+          <button href="" class="card-link btn btn-primary" (click)="previous()"><i-bs name="skip-start"></i-bs>Anterior</button>
+          <button href="" class="card-link btn btn-primary" (click)="next()">Próximo<i-bs name="skip-end"></i-bs></button>
+        </div>
+        <div class="card-body" [ngClass]="{'text-light bg-info border border-success': efeito}">
+          <p class="card-text">{{card.message}}</p>
+          <p class="card-text">{{card.obs}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

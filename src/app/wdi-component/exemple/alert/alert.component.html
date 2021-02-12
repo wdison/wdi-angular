@@ -1,0 +1,58 @@
+<div class="form-group">
+  <h3>Alert</h3>
+  <hr>
+  <wdi-card-comp>
+    <ng-template #wdiCardHeader>
+      <h3>Ex card com < wdi-card-comp ></h3>
+    </ng-template>
+    <ng-template #wdiCardBody>
+      <wdi-alert-basic></wdi-alert-basic>
+    </ng-template>
+    <ng-template #wdiCardFooter>Footer</ng-template>
+  </wdi-card-comp>
+
+  <div class="card">
+    <div class="card-header">
+      <h3>Basic</h3>
+    </div>
+    <div class="card-body">
+      <wdi-alert-basic></wdi-alert-basic>
+    </div>
+  </div>
+  <hr>
+  <div class="card">
+    <div class="card-header">
+      Closable Alert
+    </div>
+    <div class="card-body">
+      <wdi-alert-closeable></wdi-alert-closeable>
+    </div>
+  </div>
+  <hr>
+  <div class="card">
+    <div class="card-header">
+      Self closing alert
+    </div>
+    <div class="card-body">
+      <wdi-alert-selfclosing></wdi-alert-selfclosing>
+    </div>
+  </div>
+  <hr>
+  <div class="card">
+    <div class="card-header">
+      Custom alert
+    </div>
+    <div class="card-body">
+      <wdi-alert-custom></wdi-alert-custom>
+    </div>
+  </div>
+  <hr>
+  <div class="card">
+    <div class="card-header">
+      Global configuration of alerts
+    </div>
+    <div class="card-body">
+      <wdi-alert-config></wdi-alert-config>
+    </div>
+  </div>
+</div>

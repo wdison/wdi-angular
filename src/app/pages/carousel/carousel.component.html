@@ -1,0 +1,170 @@
+<div class="form-group">
+  <h3>Carousel</h3>
+  <hr>
+
+  <div class="card">
+    <div class="card-header">
+      <h3>Basic</h3>
+    </div>
+    <div class="card-body">
+      <ngb-carousel *ngIf="imagesBasic">
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="imagesBasic[0]" alt="Random first slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>First slide label</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="imagesBasic[1]" alt="Random second slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>Second slide label</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="imagesBasic[2]" alt="Random third slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>Third slide label</h3>
+            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h3>Navigation arrows and indicators</h3>
+    </div>
+    <div class="card-body">
+      <ngb-carousel *ngIf="images2" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+        <ng-template ngbSlide *ngFor="let image of images2">
+          <div class="picsum-img-wrapper">
+            <img [src]="image" alt="Random slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>No mouse navigation</h3>
+            <p>This carousel hides navigation arrows and indicators.</p>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+
+      <hr>
+
+      <div class="btn-group" role="group" aria-label="Carousel toggle controls">
+        <button type="button" (click)="showNavigationArrows = !showNavigationArrows" class="btn btn-outline-dark btn-sm">Toggle navigation arrows</button>
+        <button type="button" (click)="showNavigationIndicators = !showNavigationIndicators" class="btn btn-outline-dark btn-sm">Toggle navigation indicators</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h3>Pause/cycle</h3>
+    </div>
+    <div class="card-body">
+      <ngb-carousel #carousel [interval]="5000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus"
+        (slide)="onSlide($event)">
+        <ng-template ngbSlide *ngFor="let img of images; index as i">
+          <div class="carousel-caption">
+            <h3>My slide {{i + 1}} title WDI</h3>
+          </div>
+          <a href="{{img}}" target="_blank" rel="nofollow noopener noreferrer">
+            <div class="picsum-img-wrapper">
+              <img [src]="img" alt="My image {{i + 1}} description">
+            </div>
+          </a>
+        </ng-template>
+      </ngb-carousel>
+      <hr>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="pauseOnHover" [(ngModel)]="pauseOnHover">
+        <label class="form-check-label" for="pauseOnHover">Pause on hover</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="pauseOnFocus" [(ngModel)]="pauseOnFocus">
+        <label class="form-check-label" for="pauseOnFocus">Pause on focus</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="unpauseOnArrow" [(ngModel)]="unpauseOnArrow">
+        <label class="form-check-label" for="unpauseOnArrow">Unpause when clicking on arrows</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="pauseOnIndicator" [(ngModel)]="pauseOnIndicator">
+        <label class="form-check-label" for="pauseOnIndicator">Pause when clicking on navigation indicator</label>
+      </div>
+      <button type="button" (click)="togglePaused()" class="btn btn-outline-dark btn-sm">
+        {{paused ? 'Cycle' : 'Pause' }}
+      </button>
+    </div>
+  </div>
+
+
+
+
+  <div class="card">
+    <div class="card-header">
+      <h3>Global configuration of carousels</h3>
+    </div>
+    <div class="card-body">
+      <ngb-carousel *ngIf="images4">
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images4[0]" alt="Random first slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>10 seconds between slides...</h3>
+            <p>This carousel uses customized default values.</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images4[1]" alt="Random second slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>No mouse events...</h3>
+            <p>This carousel doesn't pause or resume on mouse events</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images4[2]"  alt="Random third slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>No keyboard...</h3>
+            <p>This carousel uses customized default values.</p>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img [src]="images4[3]" alt="Random fourth slide">
+          </div>
+          <div class="carousel-caption">
+            <h3>And no wrap after last slide.</h3>
+            <p>This carousel uses customized default values.</p>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

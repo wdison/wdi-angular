@@ -1,0 +1,9 @@
+<li class="nav-item {{itemBgClassTema}}" *ngIf='!menu.subMenus||!menu.subMenus.length'>
+  <a class="nav-link" [routerLink]="[menu.link]"><span [ngbTooltip]="menu.tooltip" openDelay='600'>{{menu.name}}</span></a>
+</li>
+<li ngbDropdown class="d-inline-block {{itemBgClassTema}}" *ngIf='menu.subMenus&&menu.subMenus.length'>
+  <a class="nav-link" [id]="dropdownId" ngbDropdownToggle><span [ngbTooltip]="menu.tooltip" openDelay='600'>{{menu.name}}</span></a>
+    <ul class="{{itemBgClassTema}}" ngbDropdownMenu aria-labelledby="{{dropdownId}}">
+    <wdi-navbar-item [itemBgClassTema]="itemBgClassTema" [menu]="subMenu" *ngFor="let subMenu of menu.subMenus"></wdi-navbar-item>
+  </ul>
+</li>

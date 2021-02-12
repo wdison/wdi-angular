@@ -1,0 +1,14 @@
+<ng-template #wdiCardBodyDefault><p>Default Body</p></ng-template>
+
+<div class="card">
+  <ng-content></ng-content>
+  <div class="card-header" *ngIf="wdiCardHeader">
+    <div *ngTemplateOutlet="wdiCardHeader"></div>
+  </div>
+  <div class="card-body" *ngIf="wdiCardBody">
+    <ng-container [ngTemplateOutlet]="wdiCardBody"></ng-container>
+  </div>
+  <div class="card-footer" *ngIf="wdiCardFooter">
+    <ng-container *ngTemplateOutlet="wdiCardFooter"></ng-container>
+  </div>
+</div>

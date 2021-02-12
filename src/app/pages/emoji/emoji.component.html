@@ -1,0 +1,46 @@
+<div class="form-group">
+  <h3>Emoji</h3>
+  <hr>
+
+  <div class="row mb-3 mt-3 text-center">
+    <div class="col-12">
+      <h2>Angular Emoji Mart ✨</h2>
+    </div>
+  </div>
+
+  <div class="row mb-1">
+    <div class="col-12 text-center">
+      <button type="button" class="btn btn-sm btn-light mr-1 mb-2" *ngFor="let theme of themes"
+        (click)="setTheme(theme)" [class.active]="theme === set">
+        {{ theme }}
+      </button>
+    </div>
+  </div>
+
+  <div class="row mb-1">
+    <div class="col-12 text-center">
+      <button type="button" class="btn btn-sm btn-light mr-1 mb-2" (click)="setDarkmode(undefined)"
+        [class.active]="darkestMode === undefined">
+        auto
+      </button>
+      <button type="button" class="btn btn-sm btn-light mr-1 mb-2" (click)="setDarkmode(true)"
+        [class.active]="darkestMode === true">
+        dark
+      </button>
+      <button type="button" class="btn btn-sm btn-light mr-1 mb-2" (click)="setDarkmode(false)"
+        [class.active]="darkestMode === false">
+        light
+      </button>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mb-3">
+    <div class="col-12">
+      <div class="d-flex justify-content-center">
+        <emoji-mart [set]="set" [darkMode]="darkMode" [isNative]="native" [hideRecent]="false" [custom]="CUSTOM_EMOJIS"
+          (emojiSelect)="handleClick($event)" title="Pick your emoji…" emoji="point_up">
+        </emoji-mart>
+      </div>
+    </div>
+  </div>
+</div>

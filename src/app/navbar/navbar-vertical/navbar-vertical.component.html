@@ -1,0 +1,30 @@
+<div class="row">
+  <div [ngClass]="classMainMenu">
+    <nav class="navbar navbar-inverse navbar-dark bg-dark">
+      <a class="navbar-brand" [ngbTooltip]="mainTitleTooltip" [routerLink]="['/']" *ngIf="navbarOpen">
+        {{mainTitle}}
+      </a>
+      <button class="navbar-toggler btn-outline-secondary" type="button"
+              (click)="toggleNavbar()"
+              ngbPopover="Menu lateral de sistema Wdi"
+              triggers="mouseenter:mouseleave"
+              popoverTitle="Wdi Menu"
+              openDelay='600'>
+        <i-bs name="backspace" *ngIf="navbarOpen"></i-bs>
+        <!-- <span class="navbar-toggler-icon" ></span> -->
+        <i-bs name="menu-button-wide" *ngIf="!navbarOpen"></i-bs>
+      </button>
+
+      <div class="collapse navbar-collapse"
+            [ngClass]="{ 'show': navbarOpen }">
+        <ul class="navbar-nav mr-auto">
+          <wdi-navbar-item [itemBgClassTema]="'bg-dark'" [menu]="menu" *ngFor="let menu of menus"></wdi-navbar-item>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div [ngClass]="classMainContent">
+    <wdi-outlet *ngIf="true"></wdi-outlet>
+    <!-- <router-outlet></router-outlet> -->
+  </div>
+</div>

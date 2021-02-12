@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" ngbTooltip="{{mainTitleTooltip}} Home" [routerLink]="['/']">
+    {{mainTitle}}
+  </a>
+
+  <button class="navbar-toggler" type="button"
+          (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
+    <ul class="navbar-nav mr-auto">
+      <wdi-navbar-item [itemBgClassTema]="'bg-dark'" [menu]="menu" *ngFor="let menu of menus"></wdi-navbar-item>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <wdi-outlet *ngIf="true"></wdi-outlet>
+  <!-- <router-outlet></router-outlet> -->
+</div>
