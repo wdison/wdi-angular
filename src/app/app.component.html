@@ -1,12 +1,12 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-3">
+    <div class="col-md-3 col-sm">
       <a class="navbar-brand" [routerLink]="['/']">
         <h1>Wdison APP CORE</h1>
       </a>
     </div>
-    <div class="col-9 text-right">
-      <label>Menu: </label>
+    <div class="col-md-9 col-sm text-right">
+      <label class="">Menu: </label>
       <div class="btn-group btn-group-toggle">
         <label class="btn btn-light" [ngClass]="{active: wdiNavType=='vertical'}"><input type="radio" [(ngModel)]="wdiNavType" value="vertical">Vertical</label>
         <label class="btn btn-light" [ngClass]="{active: wdiNavType=='horizontal'}"><input type="radio" [(ngModel)]="wdiNavType" value="horizontal">Horizontal</label>
