@@ -9,7 +9,7 @@ import GitHub from 'github-api';
 @Injectable({providedIn: 'root',})
 export class GitHubService {
 
-  private github = new GitHub({username:'wdison',password:'04ce84114719b0084d083d71213ecdf6ddcf4a33'});
+  private github = new GitHub({username:'wdison',password:'fddb186168b315e4684797ac6885abed5a74f534'});
   private bagRepo = this.github.getRepo('wdison', 'bag');
 
   constructor(private httpClient: HttpClient ) { }
