@@ -3,11 +3,11 @@ import { RouterModule, Routes } from "@angular/router";
 
 import { HomeComponent } from "./home/home.component";
 import { CarouselComponent } from "./pages/carousel/carousel.component";
-import { CardComponent } from "./pages/card/card.component";
 import { EmojiComponent } from "./pages/emoji/emoji.component";
 import { IconComponent } from "./pages/icon/icon.component";
 import { AccordionComponent } from "./pages/accordion/accordion.component";
 import { AlertComponent } from "./wdi-component/exemple/alert";
+import { CardComponent } from "./pages/card";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },

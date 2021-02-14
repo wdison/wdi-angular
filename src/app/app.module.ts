@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { CarouselComponent } from './pages/carousel/carousel.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { CardComponent } from './pages/card/card.component';
 import { NavbarHorizontalComponent } from './navbar/navbar-horizontal/navbar-horizontal.component';
 import { NavbarVerticalComponent } from './navbar/navbar-vertical/navbar-vertical.component';
 import { allIcons, NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
@@ -22,6 +21,7 @@ import { WdiComponentModule } from './wdi-component/wdi-component.module';
 import { WdiExempleModule } from './wdi-component/exemple/exemple.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { CardComponent } from './pages/card';
 
 @NgModule({
   declarations: [

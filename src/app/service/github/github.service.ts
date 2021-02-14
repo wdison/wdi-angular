@@ -4,14 +4,12 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import axios from "axios";
-// import * as GitHubLib from 'github-api/dist/GitHub';
-// import {GitHub} from 'github-api/dist/GitHub';
 import GitHub from 'github-api';
 
 @Injectable({providedIn: 'root',})
 export class GitHubService {
 
-  private github = new GitHub({username:'wdison',password:'159f2ea63a98ee2d83dc3fd1ff61bf083f7aa5d4'});
+  private github = new GitHub({username:'wdison',password:'a3967fb33213b687c2dc204084b9a9b491f0818e'});
   private bagRepo = this.github.getRepo('wdison', 'bag');
 
   constructor(private httpClient: HttpClient ) { }
