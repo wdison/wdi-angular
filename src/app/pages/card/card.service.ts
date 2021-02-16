@@ -77,6 +77,7 @@ export class CardService {
       'Seja muito mais rápido e eficaz.',
       'Tente ter o dobro de eficiencia e/ou eficácia, a cada dia, em tudo que puder/conseguir fazer.',
       'Priorize os projetos mais rentáveis, identifique-o.',
+      'Não desista nunca.',
     ];
     for(let index in metasECiencias){
       this._cards.push(new Card(metasECiencias[index], 'Tenha ciência desse lembrete.','','Meta'));
