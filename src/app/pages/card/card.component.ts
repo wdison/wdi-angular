@@ -11,6 +11,7 @@ import { CardService } from './card.service';
 })
 export class CardComponent implements OnInit {
   card: Card;
+  public newCard: Card;
   efeito: boolean;
   private continNext:boolean=false;
   private continPrevious:boolean=false;
@@ -19,17 +20,19 @@ export class CardComponent implements OnInit {
   private cards: Card[];
   private index: number;
   cardService: CardService;
+  crud: boolean;
   constructor(cardService: CardService) {
     this.cardService = cardService;
     this.cards = cardService.cards();
     this.index = 0;
     this.card = this.cards[this.index];
+    this.prepareCard();
   }
 
   @HostListener('document:keydown', ['$event'])
   onKeyDownEvent(event: KeyboardEvent) {
     let _cardInterval = 600;
-    if('ArrowRight'==event.key&&!this.continNext){
+    if('ArrowRight'==event.key&&!this.continNext && !this.crud){
       this.continNext=true;
       this.continPrevious=false;
       this.next();
@@ -38,7 +41,7 @@ export class CardComponent implements OnInit {
         this.next();
       });
 
-    } else if('ArrowLeft'==event.key&&!this.continPrevious){
+    } else if('ArrowLeft'==event.key&&!this.continPrevious && !this.crud){
       this.continPrevious=true;
       this.continNext=false;
       this.previous();
@@ -55,6 +58,7 @@ export class CardComponent implements OnInit {
     if(event.ctrlKey && 'c'==event.key.toLowerCase()){
       this.efeito=false;
       this.wdiCard=false;
+      this.crud=false;
       this.onWdiCard();
     }else if('ArrowRight'==event.key)
       // this.next();
@@ -62,9 +66,12 @@ export class CardComponent implements OnInit {
     else if('ArrowLeft'==event.key)
       // this.previous();
       this.continPrevious=false;
-    else if(event.key!='Control'){
+    else if(event.key!='Control' && !this.crud){
       this.wdiCardInputKey+=event.key.toLowerCase();
       let tamStr = 6;
+      if(this.wdiCardInputKey=='wdisons'){
+        this.crud=true;
+      }
       if(this.wdiCardInputKey.length>tamStr)this.wdiCardInputKey=this.wdiCardInputKey.substr(this.wdiCardInputKey.length-tamStr);
       if(this.wdiCardInputKey=='wdison'){
         this.efeito=true;
@@ -87,16 +94,42 @@ export class CardComponent implements OnInit {
     this.prepareCard();
   }
 
+  incluir(){
+    this.index = this.cards.length;
+    this.card.id = (1+this.index).toString();
+    this.cards.push(this.copy(this.card));
+    console.log('incluindo card abaixo');
+    console.log(this.card);
+  }
+
+  atualizar(){
+    this.index = this.cards.findIndex(card=>card.id==this.card.id);
+    this.cards[this.index]=this.copy(this.card);
+    console.log('atualizando card abaixo');
+    console.log(this.cards[this.index]);
+  }
+
+  salvar(){
+    this.cardService.save(this.cards).then(data=>{
+      console.log('Salvou '+this.cards.length+' cartões no repositório');
+      console.log(data);
+    });
+  }
+
   private prepareCard() {
     if (this.index >= this.cards.length) this.index = 0;
     if (this.index < 0) this.index = this.cards.length - 1;
-    this.card = this.cards[this.index];
+    this.card = this.copy(this.cards[this.index]);
+    if(!this.card.id){
+      let id=0;
+      this.cards.forEach(card=>{card.id=(++id).toString()})
+      this.card = this.copy(this.cards[this.index]);
+    }
   }
 
   onWdiCard(){
     this.index = 0;
     if(this.wdiCard){
-      // this.cards = this.cardService.efectsCards_Old();
       this.cardService.efectsCards().then(cards=>{
         this.cards = cards;
         this.prepareCard();
@@ -105,5 +138,9 @@ export class CardComponent implements OnInit {
       this.cards = this.cardService.cards();
     }
     this.prepareCard();
+  }
+
+  copy(card:Card):Card{
+    return Object.assign({}, card);
   }
 }

@@ -1,3 +1,4 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { GitHubService } from 'src/app/service/github/github.service';
 import { Card } from './card';
@@ -7,16 +8,17 @@ import { Card } from './card';
 })
 export class CardService {
   private _cards: Card[];
+  private jsonFileName='wdiCard.json';
 
   constructor(private githubService:GitHubService) {}
 
   cards(): Card[]{
-    let tmpMsg = ' - Tenha comprometimento e foco em tudo que fizer.';
+    let tmpMsg = 'Tenha comprometimento e foco em tudo que fizer.';
     this._cards = new Array();
     const max = 10;
     for (let i = 0 ;i < max; ) {
       i++;
-      this._cards.push(new Card(i+tmpMsg));
+      this._cards.push(new Card(tmpMsg));
     }
     return this._cards;
   }
@@ -83,10 +85,8 @@ export class CardService {
       this._cards.push(new Card(metasECiencias[index], 'Tenha ciência desse lembrete.','','Meta'));
     }
 
-    let jsonFileName='wdiCard.json';
-
-    this.githubService.write(jsonFileName,JSON.stringify(this._cards));
-    this.githubService.read(jsonFileName).then(cards=>{
+    this.githubService.write(this.jsonFileName,JSON.stringify(this._cards));
+    this.githubService.read(this.jsonFileName).then(cards=>{
       this._cards = cards;
     });
 
@@ -96,12 +96,26 @@ export class CardService {
 
   efectsCards(): Promise<Card[]> {
     this._cards = new Array();
-
-    let jsonFileName='wdiCard.json';
-
-    return this.githubService.read(jsonFileName).then(cards=>{
+    return this.githubService.read(this.jsonFileName).then(cards=>{
       this._cards = cards;
       return new Promise<Card[]>(resolv=>{resolv(this._cards)});
     });
   }
+
+  save(cards: Card[]){
+    let cardsStr = this.stringifyItens(cards);
+    return this.githubService.write(this.jsonFileName,cardsStr);
+  }
+
+  stringifyItens(itens: any[]) {
+    let itensStr='[';
+    itens.forEach((card,i)=>{
+      if(i>0) itensStr+=',';
+      itensStr+='\n'+JSON.stringify(card);
+    });
+    itensStr+='\n]';
+    return itensStr;
+  }
+
+
 }

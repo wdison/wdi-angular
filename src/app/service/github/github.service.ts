@@ -30,8 +30,9 @@ export class GitHubService {
     let fileNameFull = 'json/'+fileName;
     let initialMessage=commitMsg||'Commit de '+fileNameFull;
     const promise = this.bagRepo.writeFile('master', fileNameFull, fileContent, initialMessage);
-         promise.then((valor) => {
-           console.log(valor);
-        });
+    promise.then((valor) => {
+      console.log(valor);
+    });
+    return promise;
   }
 }
