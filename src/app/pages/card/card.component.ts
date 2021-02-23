@@ -71,6 +71,8 @@ export class CardComponent implements OnInit {
       let tamStr = 6;
       if(this.wdiCardInputKey=='wdisons'){
         this.crud=true;
+        this.wdiCardInputKey=this.wdiCardInputKey.substr(0, tamStr);
+        return;
       }
       if(this.wdiCardInputKey.length>tamStr)this.wdiCardInputKey=this.wdiCardInputKey.substr(this.wdiCardInputKey.length-tamStr);
       if(this.wdiCardInputKey=='wdison'){
@@ -114,6 +116,10 @@ export class CardComponent implements OnInit {
       console.log('Salvou '+this.cards.length+' cartões no repositório');
       console.log(data);
     });
+  }
+
+  closeCrud(){
+    this.crud=false;
   }
 
   private prepareCard() {

@@ -33,6 +33,7 @@
               <button href="" class="card-link btn btn-primary" (click)="incluir()" *ngIf="crud"><i-bs name="box-arrow-in-right"></i-bs>&nbsp;&nbsp;Incluir</button>
               <button href="" class="card-link btn btn-primary" (click)="atualizar()" *ngIf="crud"><i-bs name="box-arrow-in-right"></i-bs>&nbsp;&nbsp;Atualizar</button>
               <button href="" class="card-link btn btn-primary" (click)="salvar()" *ngIf="crud"><i-bs name="save"></i-bs>&nbsp;&nbsp;Salvar</button>
+              <button href="" class="card-link btn btn-primary" (click)="closeCrud()" *ngIf="crud"><i-bs name="close"></i-bs>&nbsp;&nbsp;Fechar</button>
             </div>
           </div>
           <div class="card-body" [ngClass]="{'text-light bg-info border border-success': efeito}">

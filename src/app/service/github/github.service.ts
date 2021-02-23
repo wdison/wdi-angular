@@ -11,11 +11,12 @@ export class GitHubService {
   private tmp3='257c2953bc0ac4';
   private tmp1='ca500a1c01803';
   private tmp2='334f29da3a157';
-  private github = new GitHub({username:'wdison',password:this.tmp1+this.tmp2+this.tmp3});
-  private bagRepo = this.github.getRepo('wdison', 'bag');
 
+  private bagRepo;
 
-  constructor(private httpClient: HttpClient ) { }
+  constructor(private httpClient: HttpClient ) {
+    this.initRepo();
+  }
 
   read(fileName:string):Promise<any> {
     let fileNameFull = 'json/'+fileName;
@@ -23,7 +24,7 @@ export class GitHubService {
     return promise.then((valor) => {
       console.log(valor);
       return this.httpClient.get(valor.data.download_url).toPromise();
-   });
+   },this.initRepo);
   }
 
   write(fileName:string,fileContent:string,commitMsg:string=''){
@@ -32,7 +33,12 @@ export class GitHubService {
     const promise = this.bagRepo.writeFile('master', fileNameFull, fileContent, initialMessage);
     promise.then((valor) => {
       console.log(valor);
-    });
+    },this.initRepo);
     return promise;
+  }
+
+  private initRepo(){
+    let github = new GitHub({username:'wdison',password:this.tmp1+this.tmp2+this.tmp3});
+    this.bagRepo = github.getRepo('wdison', 'bag');
   }
 }
