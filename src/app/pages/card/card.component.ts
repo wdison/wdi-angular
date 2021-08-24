@@ -73,16 +73,18 @@ export class CardComponent implements OnInit {
     else if(event.key!='Control' && !this.crud){
       this.wdiCardInputKey+=event.key.toLowerCase();
       let tamStr = 6;
-      if(this.wdiCardInputKey=='wdisons'){
+      if(this.wdiCardInputKey=='wdisons' || (this.wdiCard && this.wdiCardInputKey.substr(4, 3) == 'sss')){
         this.crud=true;
         this.wdiCardInputKey=this.wdiCardInputKey.substr(0, tamStr);
         return;
       }
       if(this.wdiCardInputKey.length>tamStr)this.wdiCardInputKey=this.wdiCardInputKey.substr(this.wdiCardInputKey.length-tamStr);
       if(this.wdiCardInputKey=='wdison'){
+        if(this.efeito){
+          this.onWdiCard();
+        }
         this.efeito=true;
         this.wdiCard=true;
-        this.onWdiCard();
       }
     }
     return true;
