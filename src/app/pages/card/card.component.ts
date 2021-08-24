@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { interval } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
+import { SpeechService } from 'src/app/service/speech/speech.service';
 import { Card } from './card';
 import { CardService } from './card.service';
 
@@ -21,7 +22,10 @@ export class CardComponent implements OnInit {
   private index: number;
   cardService: CardService;
   crud: boolean;
-  constructor(cardService: CardService) {
+  speechText: boolean;
+
+  constructor(cardService: CardService,
+    private speechService: SpeechService) {
     this.cardService = cardService;
     this.cards = cardService.cards();
     this.index = 0;
@@ -84,16 +88,37 @@ export class CardComponent implements OnInit {
     return true;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let param = {id:'speechContainer',text:'Audio configurado!'}
+    this.speechService.config(param);
+  }
 
   previous() {
     this.index--;
     this.prepareCard();
+    if(this.speechText){
+      this.speechService.setText(this.card.message);
+      this.speechService.play();
+    }
   }
 
   next() {
     this.index++;
     this.prepareCard();
+    if(this.speechText){
+      this.speechService.setText(this.card.message);
+      this.speechService.play();
+    }
+  }
+
+  audio(){
+    this.speechText = !this.speechText;
+    if(this.speechText){
+      this.speechService.setText(this.card.message);
+      this.speechService.play();
+    }else{
+      this.speechService.stop();
+    }
   }
 
   incluir(){

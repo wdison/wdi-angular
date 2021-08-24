@@ -4,7 +4,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import axios from "axios";
-import GitHub from 'github-api';
+import GitHub from "github-api";
 
 @Injectable({providedIn: 'root',})
 export class GitHubService {
