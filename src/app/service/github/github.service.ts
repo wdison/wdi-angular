@@ -19,7 +19,7 @@ export class GitHubService {
   }
 
   read(fileName:string):Promise<any> {
-    let fileNameFull = 'json/'+fileName;
+    let fileNameFull = 'json/'+fileName+'?diso='+(new Date()).toISOString();
     const promise:Promise<any> = this.bagRepo.getContents('master', fileNameFull);
     return promise.then((valor) => {
       console.log(valor);
@@ -28,7 +28,7 @@ export class GitHubService {
   }
 
   write(fileName:string,fileContent:string,commitMsg:string=''){
-    let fileNameFull = 'json/'+fileName;
+    let fileNameFull = 'json/'+fileName+'?diso='+(new Date()).toISOString();
     let initialMessage=commitMsg||'Commit de '+fileNameFull;
     const promise = this.bagRepo.writeFile('master', fileNameFull, fileContent, initialMessage);
     promise.then((valor) => {
