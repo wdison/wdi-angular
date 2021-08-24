@@ -80,11 +80,9 @@ export class CardComponent implements OnInit {
       }
       if(this.wdiCardInputKey.length>tamStr)this.wdiCardInputKey=this.wdiCardInputKey.substr(this.wdiCardInputKey.length-tamStr);
       if(this.wdiCardInputKey=='wdison'){
-        if(this.efeito){
-          this.onWdiCard();
-        }
         this.efeito=true;
         this.wdiCard=true;
+        this.onWdiCard();
       }
     }
     return true;
@@ -100,6 +98,7 @@ export class CardComponent implements OnInit {
     this.prepareCard();
     if(this.speechText){
       this.speechService.setText(this.card.message);
+      this.speechService.stop();
       this.speechService.play();
     }
   }
