@@ -28,7 +28,7 @@
               <button href="" class="card-link btn btn-primary" (click)="next()">Próximo<i-bs name="skip-end"></i-bs></button>
               <button href="" class="card-link btn {{speechText?'btn-success':'btn-primary'}}" (click)="audio()"><i-bs name="{{speechText?'volume-up-fill':'volume-mute-fill'}}"></i-bs></button>
             </div>
-            <div class="row" style="{{speechText?'':'display: none;'}}">
+            <div class="row" [style]="speechText?'':'display: none;'">
               <div id="speechContainer"></div>
             </div>
           </div>
