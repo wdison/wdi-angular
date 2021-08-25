@@ -99,7 +99,10 @@ export class CardComponent implements OnInit {
     if(this.speechText){
       this.speechService.setText(this.card.message);
       this.speechService.stop();
-      this.speechService.play();
+      let _self = this;
+      setTimeout(function(){
+        _self.speechService.play();
+      },10);
     }
   }
 
@@ -108,7 +111,11 @@ export class CardComponent implements OnInit {
     this.prepareCard();
     if(this.speechText){
       this.speechService.setText(this.card.message);
-      this.speechService.play();
+      this.speechService.stop();
+      let _self = this;
+      setTimeout(function(){
+        _self.speechService.play();
+      },10);
     }
   }
 
