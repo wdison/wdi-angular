@@ -23,6 +23,8 @@ export class CardComponent implements OnInit {
   cardService: CardService;
   crud: boolean;
   speechText: boolean;
+  speechStopToNext: boolean;
+  _self:CardComponent;
 
   constructor(cardService: CardService,
     private speechService: SpeechService) {
@@ -31,6 +33,7 @@ export class CardComponent implements OnInit {
     this.index = 0;
     this.card = this.cards[this.index];
     this.prepareCard();
+    this._self = this;
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -89,7 +92,11 @@ export class CardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let param = {id:'speechContainer',text:'Audio configurado!'}
+    let _self = this;
+    function onSpeechStop(){
+      _self.speechStopToNext&&_self.next();
+    }
+    let param = {id:'speechContainer',text:'Audio configurado!',on:{stop:onSpeechStop}}
     this.speechService.config(param);
   }
 
