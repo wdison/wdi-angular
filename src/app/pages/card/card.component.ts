@@ -96,6 +96,12 @@ export class CardComponent implements OnInit {
     function onSpeechStop(){
       setTimeout(function(){
         if(_self.speechText&&_self.speechStopToNext){
+          function randomInt(min:number,max:number){
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+          }
+          let rate = randomInt(40, 80);
+          let pitch = randomInt(0, 100);
+          _self.speechService.setText(undefined,rate,pitch);
           let el: HTMLElement = _self.nextElement.nativeElement;
           el.click();
           // _self.next();

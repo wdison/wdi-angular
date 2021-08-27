@@ -6,7 +6,7 @@ declare interface WdiSpeech{
   stop: () => any;
   resume: () => any;
   play: () => any;
-  setText: (text:string) => any;
+  setText: (text:string, rate?:number, pitch?:number) => any;
 }
 
 declare interface SpeechParam {
@@ -49,7 +49,7 @@ export class SpeechService {
     return this.wdiSpeech.play();
   }
 
-  setText (text:string){
-    return this.wdiSpeech.setText(text);
+  setText (text:string, rate?:number, pitch?:number){
+    return this.wdiSpeech.setText(text,rate,pitch);
   }
 }
