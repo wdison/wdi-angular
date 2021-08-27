@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { interval } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { SpeechService } from 'src/app/service/speech/speech.service';
@@ -24,7 +24,8 @@ export class CardComponent implements OnInit {
   crud: boolean;
   speechText: boolean;
   speechStopToNext: boolean;
-  _self:CardComponent;
+
+  @ViewChild('nextBtnElement') nextElement: ElementRef<HTMLElement>;
 
   constructor(cardService: CardService,
     private speechService: SpeechService) {
@@ -33,7 +34,6 @@ export class CardComponent implements OnInit {
     this.index = 0;
     this.card = this.cards[this.index];
     this.prepareCard();
-    this._self = this;
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -94,7 +94,13 @@ export class CardComponent implements OnInit {
   ngOnInit(): void {
     let _self = this;
     function onSpeechStop(){
-      _self.speechStopToNext&&_self.next();
+      setTimeout(function(){
+        if(_self.speechText&&_self.speechStopToNext){
+          let el: HTMLElement = _self.nextElement.nativeElement;
+          el.click();
+          // _self.next();
+        }
+      },200);
     }
     let param = {id:'speechContainer',text:'Audio configurado!',on:{stop:onSpeechStop}}
     this.speechService.config(param);
