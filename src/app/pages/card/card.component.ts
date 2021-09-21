@@ -97,6 +97,7 @@ export class CardComponent implements OnInit {
     function onSpeechStop(){
       setTimeout(function(){
         if(_self.speechText&&_self.speechStopToNext && (new Date().getTime() - timeStopedEvent) > 600){
+          timeStopedEvent = new Date().getTime();
           function randomInt(min:number,max:number){
             return Math.floor(Math.random() * (max - min + 1)) + min;
           }
