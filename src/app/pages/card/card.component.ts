@@ -93,13 +93,15 @@ export class CardComponent implements OnInit {
 
   ngOnInit(): void {
     let _self = this;
+    let timeStopedEvent = new Date().getTime();
     function onSpeechStop(){
       setTimeout(function(){
-        if(_self.speechText&&_self.speechStopToNext){
+        if(_self.speechText&&_self.speechStopToNext && (new Date().getTime() - timeStopedEvent) > 600){
           function randomInt(min:number,max:number){
             return Math.floor(Math.random() * (max - min + 1)) + min;
           }
-          let rate = randomInt(40, 80);
+          // let rate = randomInt(40, 80);
+          let rate = undefined;
           let pitch = randomInt(0, 100);
           _self.speechService.setText(undefined,rate,pitch);
           let el: HTMLElement = _self.nextElement.nativeElement;
